@@ -5,6 +5,8 @@ const mongoose = require('mongoose')
 
 const app = expres()
 
+const usersRoutes = require('./routes/users')
+
 mongoose.Promise = global.Promise
 mongoose.connect('mongodb://localhost/rest-api-example')
     .then(db => console.log('db is connected'))
@@ -18,6 +20,7 @@ app.use(morgan('dev'))
 app.use(bodyParser.json())
 
 // routes
+app.use('./users', usersRoutes)
 
 // start server
 app.listen(app.get('port'), () => {
